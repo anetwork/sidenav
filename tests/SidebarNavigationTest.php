@@ -9,7 +9,8 @@
 use Anetwork\SideNav\Menu;
 use Anetwork\SideNav\SideNav;
 
-class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
+class SidebarNavigationTest extends PHPUnit_Framework_TestCase
+{
 
     // instance of sidenav class
     protected $sidenav;
@@ -50,7 +51,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
 
         $this->subMenu = "user_profile";
 
-        $this->callback = function (Menu $menu) {
+        $this->callback = function ($menu)
+        {
 
             $menu->link('/home');
 
@@ -60,7 +62,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
 
             $menu->title('Dashboard');
 
-            $menu->sub($this->subMenu, function (Menu $menu) {
+            $menu->sub($this->subMenu, function ($menu){
                 $menu->link('/user/profile');
                 $menu->icon('fa fa-user');
             });
@@ -77,9 +79,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
     {
         // set group
         $this->sidenav->group('user',function (){
-
             $this->registerMenu();
-
         });
     }
 
@@ -130,8 +130,6 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
         // register menu item
         $this->registerMenu();
 
-        $this->sidenav->register($this->route, $this->callback);
-
         // Check menu has json type
         $this->assertJson($this->sidenav->type('json')->render());
     }
@@ -156,8 +154,6 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
     {
         // register menu item
         $this->registerMenuGroup();
-
-        $this->sidenav->register($this->route, $this->callback);
 
         // check render group menu has registered item
         $this->assertEquals($this->route,$this->sidenav->type('array')->render('user')[0]['name']);
