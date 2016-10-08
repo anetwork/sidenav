@@ -3,6 +3,8 @@
 [![Total Downloads](https://poser.pugx.org/anetwork/sidenav/downloads)](https://packagist.org/packages/anetwork/sidenav)
 [![Latest Unstable Version](https://poser.pugx.org/anetwork/sidenav/v/unstable)](//packagist.org/packages/anetwork/sidenav)
 [![License](https://poser.pugx.org/anetwork/sidenav/license)](https://packagist.org/packages/anetwork/sidenav)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/anetwork/sidenav/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/anetwork/sidenav/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/anetwork/sidenav/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/anetwork/sidenav/?branch=master)
 
 # Anetwork SideNav
 Sidebar navigation managment
