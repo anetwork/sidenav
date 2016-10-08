@@ -34,13 +34,13 @@ class Menu {
     ];
 
     // is_new icon option : boolean
-    protected $is_new = false;
+    protected $isNew = false;
 
     // selected option
     protected $selected = false;
 
     // open child when item is active : boolean
-    protected $open_child_on_click = true;
+    protected $openChildOnClick = true;
 
     // the sub menu array
     protected $submenu = [];
@@ -102,9 +102,9 @@ class Menu {
      * Set the class-name option
      * @param $class_name
      */
-    public function className($class_name)
+    public function className($className)
     {
-        $this->class = $class_name;
+        $this->class = $className;
     }
 
     /**
@@ -142,7 +142,7 @@ class Menu {
      */
     public function is_new($isNew)
     {
-        $this->is_new = $isNew;
+        $this->isNew = $isNew;
     }
 
     /**
@@ -160,7 +160,7 @@ class Menu {
      */
     public function openChildOnClick($type)
     {
-        $this->open_child_on_click = $type;
+        $this->openChildOnClick = $type;
     }
 
     /**
@@ -184,8 +184,8 @@ class Menu {
             'icon' => $this->icon,
             'link' => $this->link,
             'selected' => $this->selected,
-            'is_new' => $this->is_new,
-            'open_child_on_click' => $this->open_child_on_click,
+            'is_new' => $this->isNew,
+            'open_child_on_click' => $this->openChildOnClick,
             'sub' => $submenu
         ];
 
