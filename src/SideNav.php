@@ -204,9 +204,9 @@ class SideNav
             if ($class->handle($route))
                 return true;
             return false;
+        } else {
+            throw new Exception("The CheckStatus class not found ! You must have a CheckStatus class.");
         }
-
-        exit("The CheckStatus class not found ! You must have a CheckStatus class.");
     }
 
 }
