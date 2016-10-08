@@ -15,10 +15,7 @@
   "autoload": {
     "psr-4": {
       "Anetwork\\SideNav\\": "src/"
-    },
-    "files": [
-      "src/helpers.php"
-    ]
+    }
   },
   "license": "MIT"
 }
