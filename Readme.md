@@ -17,6 +17,9 @@ Sidebar navigation managment
 ### [Register a new item](#register-a-new-item) | [Define a check status object](#define-a-check-status-object) | [Register a new item with check status](#register-a-new-item-with-check-status) | [Make the SideNav group items](#sidenav-group) 
 ### [Menu options](#menu-options) | [Render menu](#get-the-return-array-of-menu) | [License](#license)
 
+## Requirement
+* php 5.5>=
+
 ## Install with composer
 * You can install this package with composer
 * if you don't have composer on your system , get started with http://getcomposer.org
