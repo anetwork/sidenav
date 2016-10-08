@@ -17,7 +17,7 @@ class SideNav
     protected static $type;
 
     // current position of route
-    protected static $current_route;
+    protected static $currentRoute;
 
     // the item url
     protected static $url;
@@ -39,6 +39,8 @@ class SideNav
 
     /**
      * Define checkstatus object
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $class
      */
     public static function checkStatusObject($class)
@@ -48,6 +50,8 @@ class SideNav
 
     /**
      * Make the SideNav group
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $type
      * @param $callback
      */
@@ -65,16 +69,18 @@ class SideNav
 
     /**
      * Register a new menu item
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $route
      * @param $callback
      */
     public static function register($route, $callback)
     {
         // set current route
-        self::$current_route = $route;
+        self::$currentRoute = $route;
 
         // register route
-        self::$routes[self::$current_route] = [];
+        self::$routes[self::$currentRoute] = [];
 
         // make menu array
         $array = self::add($route,$callback);
@@ -89,13 +95,16 @@ class SideNav
 
     /**
      * Register a new menu item
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $route
      * @param $callback
      */
     public static function registerWithCheckStatus($route, $callback)
     {
         // check status of route
-        if (self::checkStatus($route)) {
+        if (self::checkStatus($route))
+        {
             // register menu
             self::register($route, $callback);
         }
@@ -103,6 +112,8 @@ class SideNav
 
     /**
      * Add the submenu to item
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $route
      * @param $callback
      * @return array
@@ -110,7 +121,7 @@ class SideNav
     public static function addSub($route, $callback)
     {
         // register route name
-        array_push(self::$routes[self::$current_route],$route);
+        array_push(self::$routes[self::$currentRoute],$route);
 
         // return submenu array
         return self::add($route,$callback);
@@ -118,6 +129,8 @@ class SideNav
 
     /**
      * Add the menu item
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $route
      * @param $callback
      * @return array
@@ -136,6 +149,8 @@ class SideNav
 
     /**
      * Get all routes
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @return array
      */
     public static function routes()
@@ -148,6 +163,13 @@ class SideNav
         return self::$routes;
     }
 
+    /**
+     * set render type
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 20 Sep 2016
+     * @param $type
+     * @return SideNav
+     */
     public static function type($type)
     {
         self::$resultType = $type;
@@ -156,11 +178,14 @@ class SideNav
 
     /**
      * Render the menu items
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @return mixed
      */
     public static function render($type = null)
     {
-        if(self::checkGroupId($type)) {
+        if(self::checkGroupId($type))
+        {
 
             // render the menu json array
             if(self::$resultType === 'json')
@@ -180,6 +205,8 @@ class SideNav
 
     /**
      * Check group id
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @return bool
      */
     public static function checkGroupId($type)
@@ -192,6 +219,8 @@ class SideNav
 
     /**
      * Check user status
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 19 Sep 2016
      * @param $route
      * @return bool
      */
@@ -199,7 +228,8 @@ class SideNav
     {
         $obj = self::$checkStatusObject;
 
-        if(class_exists($obj)) {
+        if(class_exists($obj))
+        {
             $class = new $obj;
             if ($class->handle($route))
                 return true;
