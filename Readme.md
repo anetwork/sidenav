@@ -12,7 +12,7 @@ composer require anetwork/sidenav
 ```
 
 ## Register a new item
-* Define your all of items on file " app/config/SideNav/Config.php "
+* Define your all of items
 
 ```php
 SideNav::register('{item_name}',function($menu){
