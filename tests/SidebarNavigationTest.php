@@ -127,28 +127,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
      */
     public function testJsonRender()
     {
-        // register a random menu item
-        // route name
-        $this->route = "home_page";
-
-        $this->subMenu = "user_profile";
-
-        $this->callback = function (Menu $menu) {
-
-            $menu->link('/home');
-
-            $menu->icon('fa fa-dashboard');
-
-            $menu->newTab(true);
-
-            $menu->title('Dashboard');
-
-            $menu->sub($this->subMenu, function (Menu $menu) {
-                $menu->link('/user/profile');
-                $menu->icon('fa fa-user');
-            });
-
-        };
+        // register menu item
+        $this->registerMenu();
 
         $this->sidenav->register($this->route, $this->callback);
 
@@ -162,30 +142,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
      */
     public function testRegisterGroup()
     {
-        // register a random menu item
-        // route name
-        $this->route = "home_page";
-
-        $this->subMenu = "user_profile";
-
-        $this->callback = function (Menu $menu) {
-
-            $menu->link('/home');
-
-            $menu->icon('fa fa-dashboard');
-
-            $menu->newTab(true);
-
-            $menu->title('Dashboard');
-
-            $menu->sub($this->subMenu, function (Menu $menu) {
-                $menu->link('/user/profile');
-                $menu->icon('fa fa-user');
-            });
-
-        };
-
-        $this->sidenav->register($this->route, $this->callback);
+        // register menu item
+        $this->registerMenuGroup();
 
         // check group item has been registered
         $this->assertArrayHasKey('user',$this->sidenav->type('array')->render());
@@ -196,28 +154,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase {
      */
     public function testGroupHasRegisteredItem()
     {
-        // register a random menu item
-        // route name
-        $this->route = "home_page";
-
-        $this->subMenu = "user_profile";
-
-        $this->callback = function ($menu) {
-
-            $menu->link('/home');
-
-            $menu->icon('fa fa-dashboard');
-
-            $menu->newTab(true);
-
-            $menu->title('Dashboard');
-
-            $menu->sub($this->subMenu, function ($menu) {
-                $menu->link('/user/profile');
-                $menu->icon('fa fa-user');
-            });
-
-        };
+        // register menu item
+        $this->registerMenuGroup();
 
         $this->sidenav->register($this->route, $this->callback);
 
