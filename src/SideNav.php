@@ -13,6 +13,9 @@ namespace Anetwork\SideNav;
 class SideNav
 {
 
+    // use Sidenav helper methods in class
+    use SideNavHelpers;
+
     // group route
     protected static $type;
 

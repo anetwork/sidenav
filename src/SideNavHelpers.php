@@ -4,33 +4,38 @@
  * @author Alireza Josheghani <a.josheghani@anetwork.ir>
  * @version 1.0
  * @package SideNav
- * @since 19 Sep 2016
- * SideNav helper functions
+ * @since 8 Oct 2016
+ * SideNav helper methods
  */
 
-if(! function_exists('hasSub'))
-{
+namespace Anetwork\SideNav;
+
+trait SideNavHelpers {
+
     /**
      * Check menu has sub
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 8 Oct 2016
      * @param $menu
      * @return bool
      */
-    function hasSub($menu)
+    public static function hasSub($menu)
     {
+        // check menu has sub
         if(! empty($menu['sub']))
             return true;
+
         return false;
     }
-}
 
-if(! function_exists('icon'))
-{
     /**
      * Print item icon
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 8 Oct 2016
      * @param $value
      * @return string
      */
-    function itemIcon($value)
+    public static function itemIcon($value)
     {
 
         $tag = $value['tag'];
@@ -40,20 +45,20 @@ if(! function_exists('icon'))
 
         return '<' . $tag . ' class="' . $value['value'] . '"></' . $tag . '>';
     }
-}
 
-if(! function_exists('new_tab'))
-{
     /**
      * Print item new_tab option
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since 8 Oct 2016
      * @param $newTab
      * @return null|string
      */
-    function new_tab($newTab)
+    public static function new_tab($newTab)
     {
         if($newTab)
             return 'target="_blank"';
 
         return null;
     }
+
 }
