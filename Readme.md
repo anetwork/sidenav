@@ -28,11 +28,13 @@ composer require anetwork/sidenav
 ```
 
 ## Register a new item
-* Define your all of items
+* you shoud use the register method of sidenav object
+* the method wants 2 arguments
+* the first one should be a string of your item name
+* the second one must be a function literal to use Menu Object for define all of menu options
 
 ```php
 SideNav::register('{item_name}',function($menu){
-    
     // configure the item options
     // define the link url
     $menu->link('the_item_url');
@@ -96,6 +98,11 @@ public function handle($route){
 
 
 ## Register a new item with check status
+* if you want register a item with checkstatus
+* you should use registerWithCheckStatus method of SideNav Object
+* the method , wants 2 arguments
+* the first one must be a string of your item name and ** checkstatus name **
+* the second one must be function literal to use Menu Object for define all of menu options
 
 ```php
 SideNav::registerWithCheckStatus('{item_name}',function($menu){
@@ -138,7 +145,7 @@ SideNav::group('user',function(){
 | `->className()` optional | The class of item | String |
 | `->newTab()` optional | newTab link target | Boolean : defalt => false |
 | `->title()` *required | The title of item | String |
-| `->is_new()` optional | Define the item is new | Boolean : default => false |
+| `->isNew()` optional | Define the item is new | Boolean : default => false |
 | `->selected()` optional | item selected status | Boolean : default => false |
 | `->openChildOnClick()` optional | the sub menu status | Boolean : default => true |
 
