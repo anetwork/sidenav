@@ -148,10 +148,10 @@ class SideNav
         return self::$routes;
     }
 
-    public function type($type)
+    public static function type($type)
     {
         self::$resultType = $type;
-        return $this;
+        return new self;
     }
 
     /**
@@ -182,7 +182,7 @@ class SideNav
      * Check group id
      * @return bool
      */
-    public function checkGroupId($type)
+    public static function checkGroupId($type)
     {
         if($type !== null && isset(self::$type))
             return true;
