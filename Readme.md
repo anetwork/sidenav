@@ -28,7 +28,7 @@ composer require anetwork/sidenav
 ```
 
 ## Register a new item
-* you shoud use the register method of sidenav object
+* you should use the register method of sidenav object
 * the method wants 2 arguments
 * the first one should be a string of your item name
 * the second one must be a function literal to use Menu Object for define all of menu options
