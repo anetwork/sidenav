@@ -1,6 +1,11 @@
 # Anetwork SideNav
 Sidebar navigation managment
 
+# Introduction
+* A php component that makes it easier to build vertical nav menus
+* The sidenav package can manage your sidebar navigations items on your project
+* you can install this package with composer and config your sidebar navigations items
+
 ### [Register a new item](#register-a-new-item) | [Define a check status object](#define-a-check-status-object) | [Register a new item with check status](#register-a-new-item-with-check-status) | [Make the SideNav group items](#sidenav-group) 
 ### [Menu options](#menu-options) | [Render menu](#get-the-return-array-of-menu) | [License](#license)
 
