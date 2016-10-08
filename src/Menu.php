@@ -162,7 +162,7 @@ class Menu
      * @since 20 Sep 2016
      * @param $isNew
      */
-    public function is_new($isNew)
+    public function isNew($isNew)
     {
         $this->isNew = $isNew;
     }
