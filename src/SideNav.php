@@ -179,10 +179,17 @@ class SideNav
      *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
      * @since  19 Sep 2016
+     * @param  $type
      * @return mixed
      */
     public static function render($type = null)
     {
+        // check $type was used
+        if(isset($type)) {
+            // return group menu
+            return self::$menu[$type];
+        }
+
         // return single menu array
         return self::$menu;
     }
