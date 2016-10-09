@@ -150,7 +150,6 @@ SideNav::group('user',function(){
 ```
 
 ### Render
-#### Render menu if you using grouping
 ```php
 SideNav::render();
 ```
