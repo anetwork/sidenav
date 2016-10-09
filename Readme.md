@@ -151,7 +151,7 @@ SideNav::group('user',function(){
 ```
 
 ### Render
-
+* You can use the render method of SideNav object to given your menu array
 ```php
 SideNav::render();
 ```
