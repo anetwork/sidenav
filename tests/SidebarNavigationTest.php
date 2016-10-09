@@ -2,8 +2,9 @@
 
 /**
  * Sidebar Navigation UnitTest
+ *
  * @author Alireza Josheghani <a.josheghani@anetwork.ir>
- * @since 24 Sep 2016
+ * @since  24 Sep 2016
  */
 
 use Anetwork\SideNav\SideNav;
@@ -26,8 +27,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
 
         $this->subMenu = "user_profile";
 
-        $this->callback = function ($menu)
-        {
+        $this->callback = function ($menu) {
 
             $menu->link('/home');
 
@@ -37,10 +37,12 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
 
             $menu->title('Dashboard');
 
-            $menu->sub($this->subMenu, function ($menu){
-                $menu->link('/user/profile');
-                $menu->icon('fa fa-user');
-            });
+            $menu->sub(
+                $this->subMenu, function ($menu) {
+                    $menu->link('/user/profile');
+                    $menu->icon('fa fa-user');
+                }
+            );
 
         };
     }
@@ -59,9 +61,11 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     public function registerMenuGroup()
     {
         // set group
-        SideNav::group('user',function (){
-            $this->registerMenu();
-        });
+        SideNav::group(
+            'user', function () {
+                $this->registerMenu();
+            }
+        );
     }
 
     /**
@@ -72,7 +76,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
         $this->registerMenu();
 
         // Check menu has been registered
-        $this->assertArrayHasKey($this->route,SideNav::routes());
+        $this->assertArrayHasKey($this->route, SideNav::routes());
 
     }
 
@@ -82,7 +86,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     public function testRegisteredSubMenu()
     {
         // Check menu has been registered
-        $this->assertEquals($this->subMenu,SideNav::routes($this->route)[0]);
+        $this->assertEquals($this->subMenu, SideNav::routes($this->route)[0]);
     }
 
     /**
@@ -105,7 +109,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
         $this->registerMenuGroup();
 
         // check group item has been registered
-        $this->assertArrayHasKey('user',SideNav::render());
+        $this->assertArrayHasKey('user', SideNav::render());
     }
 
     /**
@@ -114,7 +118,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     public function testGroupHasRegisteredItem()
     {
         // check render group menu has registered item
-        $this->assertEquals($this->route,SideNav::render('user')[0]['name']);
+        $this->assertEquals($this->route, SideNav::render('user')[0]['name']);
 
     }
 

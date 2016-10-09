@@ -48,38 +48,40 @@ class Menu
 
     /**
      * Attach sub menu array
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  20 Sep 2016
+     * @param  $route
+     * @param  $callback
      */
     public function sub($route, $callback)
     {
         $sub = SideNav::addSub($route, $callback);
-        array_push($this->submenu,$sub);
+        array_push($this->submenu, $sub);
     }
 
     /**
      * Attach sub menu array with checking status of item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  20 Sep 2016
+     * @param  $route
+     * @param  $callback
      */
     public function subWithCheckStatus($route, $callback)
     {
-        if(SideNav::checkStatus($route) === true)
-        {
+        if(SideNav::checkStatus($route) === true) {
             $sub = SideNav::addSub($route, $callback);
-            array_push($this->submenu,$sub);
+            array_push($this->submenu, $sub);
         }
     }
 
     /**
      * Set the icon option
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $icon
+     * @since  20 Sep 2016
+     * @param  $icon
      */
     public function icon($icon)
     {
@@ -89,9 +91,10 @@ class Menu
 
     /**
      * Set the icon tag option
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $icon
+     * @since  20 Sep 2016
+     * @param  $icon
      */
     public function tag($tag)
     {
@@ -101,9 +104,10 @@ class Menu
 
     /**
      * Set the title option
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $title
+     * @since  20 Sep 2016
+     * @param  $title
      */
     public function title($title)
     {
@@ -112,9 +116,10 @@ class Menu
 
     /**
      * Set the class-name option
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $class_name
+     * @since  20 Sep 2016
+     * @param  $class_name
      */
     public function className($className)
     {
@@ -123,9 +128,10 @@ class Menu
 
     /**
      * Set the newTab option
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $newtab : boolean
+     * @since  20 Sep 2016
+     * @param  $newtab : boolean
      */
     public function newTab($newtab)
     {
@@ -134,9 +140,10 @@ class Menu
 
     /**
      * Set route name
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $route
+     * @since  20 Sep 2016
+     * @param  $route
      */
     public function routeName($route)
     {
@@ -145,9 +152,10 @@ class Menu
 
     /**
      * Set the link of menu
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $link
+     * @since  20 Sep 2016
+     * @param  $link
      * @return $this
      */
     public function link($link)
@@ -158,9 +166,10 @@ class Menu
 
     /**
      * Set target link of item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $isNew
+     * @since  20 Sep 2016
+     * @param  $isNew
      */
     public function isNew($isNew)
     {
@@ -169,9 +178,10 @@ class Menu
 
     /**
      * Set item is selected
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $type
+     * @since  20 Sep 2016
+     * @param  $type
      */
     public function selected($type)
     {
@@ -180,9 +190,10 @@ class Menu
 
     /**
      * Set open child when item is active
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $type
+     * @since  20 Sep 2016
+     * @param  $type
      */
     public function openChildOnClick($type)
     {
@@ -191,8 +202,9 @@ class Menu
 
     /**
      * make the return item array
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
+     * @since  20 Sep 2016
      * @return array
      */
     public function make($route)
@@ -202,8 +214,9 @@ class Menu
 
         $submenu = null;
 
-        if(!empty($this->submenu))
+        if(!empty($this->submenu)) {
             $submenu = $this->submenu;
+        }
 
         $result = [
             'name' => $this->route,
@@ -217,8 +230,9 @@ class Menu
             'sub' => $submenu
         ];
 
-        if(empty($this->submenu))
+        if(empty($this->submenu)) {
             unset($result['sub']);
+        }
 
         return $result;
 

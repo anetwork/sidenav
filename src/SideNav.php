@@ -39,9 +39,10 @@ class SideNav
 
     /**
      * Define checkstatus object
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $class
+     * @since  19 Sep 2016
+     * @param  $class
      */
     public static function checkStatusObject($class,$method)
     {
@@ -53,10 +54,11 @@ class SideNav
 
     /**
      * Make the SideNav group
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $group
-     * @param $callback
+     * @since  19 Sep 2016
+     * @param  $group
+     * @param  $callback
      */
     public static function group($group, $callback)
     {
@@ -72,10 +74,11 @@ class SideNav
 
     /**
      * Register a new menu item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  19 Sep 2016
+     * @param  $route
+     * @param  $callback
      */
     public static function register($route, $callback)
     {
@@ -86,11 +89,12 @@ class SideNav
         self::$routes[self::$currentRoute] = [];
 
         // make menu array
-        $array = self::add($route,$callback);
+        $array = self::add($route, $callback);
 
-        if (self::checkGroupId(self::$group))
+        if (self::checkGroupId(self::$group)) {
             // add to the group render array
             array_push(self::$menu[self::$group], $array);
+        }
 
         // add to the single render array
         array_push(self::$menu, $array);
@@ -98,43 +102,46 @@ class SideNav
 
     /**
      * Register a new menu item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $route
-     * @param $callback
-     * @param $checkCallback
+     * @since  19 Sep 2016
+     * @param  $route
+     * @param  $callback
+     * @param  $checkCallback
      */
     public static function registerWithCheck($route , $callback , $checkCallback = null)
     {
         // check status of route
-        if (self::checkStatus($route,$checkCallback)){
+        if (self::checkStatus($route, $checkCallback)) {
             self::register($route, $callback);
         }
     }
 
     /**
      * Add the submenu to item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  19 Sep 2016
+     * @param  $route
+     * @param  $callback
      * @return array
      */
     public static function addSub($route, $callback)
     {
         // register route name
-        array_push(self::$routes[self::$currentRoute],$route);
+        array_push(self::$routes[self::$currentRoute], $route);
 
         // return submenu array
-        return self::add($route,$callback);
+        return self::add($route, $callback);
     }
 
     /**
      * Add the menu item
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  19 Sep 2016
+     * @param  $route
+     * @param  $callback
      * @return array
      */
     private static function add($route,$callback)
@@ -151,14 +158,16 @@ class SideNav
 
     /**
      * Get all routes
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
+     * @since  19 Sep 2016
      * @return array
      */
     public static function routes($index = null)
     {
-        if($index !== null)
+        if($index !== null) {
             return self::$routes[$index];
+        }
 
         // return array of all routes-name
         return self::$routes;
@@ -167,8 +176,9 @@ class SideNav
 
     /**
      * Render the menu items
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
+     * @since  19 Sep 2016
      * @return mixed
      */
     public static function render($type = null)
@@ -179,31 +189,35 @@ class SideNav
 
     /**
      * Check group id
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
+     * @since  19 Sep 2016
      * @return bool
      */
     public static function checkGroupId($type)
     {
-        if($type !== null && isset(self::$group))
+        if($type !== null && isset(self::$group)) {
             return true;
+        }
 
         return false;
     }
 
     /**
      * Check user status
+     *
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 19 Sep 2016
-     * @param $route
-     * @param $callback
+     * @since  19 Sep 2016
+     * @param  $route
+     * @param  $callback
      * @return bool
      */
     public static function checkStatus($route,$callback = false)
     {
         if ($callback instanceof \Closure) {
-            if ($callback())
+            if ($callback()) {
                 return true;
+            }
         }
 
         // check status class name
@@ -217,8 +231,9 @@ class SideNav
             $class = new $obj;
 
             // call method of class
-            if ($class->$method($route))
+            if ($class->$method($route)) {
                 return true;
+            }
             return false;
         } else {
             throw new \Exception("The CheckStatus class not found !");
