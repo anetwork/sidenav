@@ -11,9 +11,9 @@ SideNav is a PHP package which helps you generate powerful sidebar navigation.
 
 # Features
 
-* Sub Menu
-* Grouping 
-* Define dynamic menues with if statement support
+* SubMenu : Define your submenu to item
+* Grouping : Define your items in groups
+* Cheking : Define dynamic menues and submenues with if statement support
 
 # Introduction
 * A php component that makes it easier to build vertical nav menus
@@ -21,11 +21,10 @@ SideNav is a PHP package which helps you generate powerful sidebar navigation.
 * you can install this package with composer and config your sidebar navigations items
 
 ## Requirement
-* php 5.5>=
+* php 5.5 >=
 * HHVM
 
 ## Install with composer
-
 You can install this package throw the [Composer](http://getcomposer.org) by running:
 
 ```
@@ -40,12 +39,16 @@ composer require anetwork/sidenav
 
 ```php
 SideNav::register('{item_name}',function($menu){
+
     $menu->link('the_item_url');
+    
     $menu->title('the title');
+    
     $menu->className('class-name'); // Item css class attribute
+    
     $menu->icon('fa fa-example'); //  use on font-awesome icon
     
-    // define submenu to item
+    // Register submenu to item
     $menu->sub('{sub_item_name}',function ($menu){
         $menu->link('the_item_url');
         $menu->title('the submenu title');
@@ -62,23 +65,76 @@ SideNav::register('{item_name}',function($menu){
 });
 ```
 
+## Register submenu with Check Status
+If you want register a submenu in item with checkStatus, you should use subWithCheck method of Menu Object
+* the method , accepts 3 arguments
+* first one must be a string of your item name
+* second one must be function literal to use Menu Object for define all of menu options
+* third one must be a function literal of your check state , return of function must be true or false
+
+
+```php
+SideNav::register('{item_name}',function($menu){
+
+    /**
+     * 
+     * Items options ...
+     *
+     */
+     
+     $menu->subWithCheck('{sub_item_name}',function($menu){
+     
+        /**
+         * 
+         * Item options ...
+         *
+         */
+        
+     },functiion(){
+     
+        // checking area
+        // you can define the if statement here to return boolean | true or false
+        // :: Example
+        
+        if($_SESSION['user_id'] == 2){
+            return true;
+        }
+        
+        return false;
+     
+     });
+    
+});
+```
+
+
 ## Register With Check Status
 If you want register a item with checkStatus, you should use registerWithCheck method of SideNav Object
 * the method , accepts 3 arguments
-* the first one must be a string of your item name and ** checkstatus name **
-* the second one must be function literal to use Menu Object for define all of menu options
-* the third one must be a function literal of your check state , return of function mustb be true or false
+* first one must be a string of your item name
+* second one must be function literal to use Menu Object for define all of menu options
+* third one must be a function literal of your check state , return of function mustb be true or false
 
 ```php
 SideNav::registerWithCheck('{item_name}',function($menu){
+
     $menu->link('the_item_url');
+    
     $menu->title('the title');
+    
     $menu->className('class-name');
-    $menu->icon('fa fa-example');    
+    
+    $menu->icon('fa fa-example');  
+    
 },function(){
 
     // checking area
-
+    // you can define the if statement here to return boolean | true or false
+    // :: Example
+    if($_SESSION['user_id'] == 2){
+        return true;
+    }
+    return false;
 });
 ```
 
@@ -94,13 +150,21 @@ SideNav::group('user',function(){
 ```
 
 ### Render
-return array of menu
-
+#### Render menu if you using grouping
 ```php
 $menu = SideNav::render('name_of_your_group');
     
 print_r($menu);
 ```
+
+#### Render menu if you dont using grouping
+```php
+$menu = SideNav::render();
+    
+print_r($menu);
+```
+
+
 
 ### Menu options
 
