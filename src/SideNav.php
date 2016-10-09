@@ -29,7 +29,7 @@ class SideNav
     protected static $routes = [];
 
     // instance of check status object
-    protected static $checkStatusObject;
+    protected static $checkStatusObject = [];
 
     // status of navigation
     protected static $status = false;
@@ -46,9 +46,12 @@ class SideNav
      * @since 19 Sep 2016
      * @param $class
      */
-    public static function checkStatusObject($class)
+    public static function checkStatusObject($class,$method)
     {
-        self::$checkStatusObject = $class;
+        self::$checkStatusObject = [
+            'object' => $class,
+            'method' => $method
+        ];
     }
 
     /**
@@ -102,13 +105,12 @@ class SideNav
      * @since 19 Sep 2016
      * @param $route
      * @param $callback
+     * @param $checkCallback
      */
-    public static function registerWithCheckStatus($route, $callback)
+    public static function registerWithCheckStatus($route , $callback , $checkCallback = null)
     {
         // check status of route
-        if (self::checkStatus($route))
-        {
-            // register menu
+        if (self::checkStatus($route,$checkCallback)){
             self::register($route, $callback);
         }
     }
@@ -203,7 +205,7 @@ class SideNav
             return json_encode(self::$menu);
 
         // return single menu array
-        return self::$menu;
+        return self::$menu[0];
     }
 
     /**
@@ -225,20 +227,32 @@ class SideNav
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
      * @since 19 Sep 2016
      * @param $route
+     * @param $callback
      * @return bool
      */
-    public static function checkStatus($route)
+    public static function checkStatus($route,$callback = false)
     {
-        $obj = self::$checkStatusObject;
+        if ($callback instanceof \Closure) {
+            if ($callback())
+                return true;
+        }
 
-        if(class_exists($obj))
-        {
+        // check status class name
+        $obj = self::$checkStatusObject['object'];
+
+        // check status method name
+        $method = self::$checkStatusObject['method'];
+
+        if(class_exists($obj)) {
+            // instance of class
             $class = new $obj;
-            if ($class->handle($route))
+
+            // call method of class
+            if ($class->$method($route))
                 return true;
             return false;
         } else {
-            throw new \Exception("The CheckStatus class not found ! You must have a CheckStatus class.");
+            throw new \Exception("The CheckStatus class not found !");
         }
     }
 
