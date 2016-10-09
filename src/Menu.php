@@ -68,7 +68,7 @@ class Menu
      * @param  $route
      * @param  $callback
      */
-    public function subWithCheckStatus($route, $callback)
+    public function subWithCheck($route, $callback)
     {
         if(SideNav::checkStatus($route) === true) {
             $sub = SideNav::addSub($route, $callback);
