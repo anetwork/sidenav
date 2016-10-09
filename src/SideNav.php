@@ -17,7 +17,7 @@ class SideNav
     use SideNavHelpers;
 
     // group route
-    protected static $type;
+    protected static $group;
 
     // current position of route
     protected static $currentRoute;
@@ -37,9 +37,6 @@ class SideNav
     // render array
     protected static $menu = [];
 
-    // set result render type
-    public static $resultType = 'array';
-
     /**
      * Define checkstatus object
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
@@ -58,16 +55,16 @@ class SideNav
      * Make the SideNav group
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
      * @since 19 Sep 2016
-     * @param $type
+     * @param $group
      * @param $callback
      */
-    public static function group($type, $callback)
+    public static function group($group, $callback)
     {
         // set group menu name
-        self::$type = $type;
+        self::$group = $group;
 
         // set group menu
-        self::$menu[$type] = [];
+        self::$menu[$group] = [];
 
         // run callback function
         $callback();
@@ -91,9 +88,9 @@ class SideNav
         // make menu array
         $array = self::add($route,$callback);
 
-        if (self::checkGroupId(self::$type))
+        if (self::checkGroupId(self::$group))
             // add to the group render array
-            array_push(self::$menu[self::$type], $array);
+            array_push(self::$menu[self::$group], $array);
 
         // add to the single render array
         array_push(self::$menu, $array);
@@ -158,28 +155,15 @@ class SideNav
      * @since 19 Sep 2016
      * @return array
      */
-    public static function routes()
+    public static function routes($index = null)
     {
-        // return json array of all routes-name
-        if(self::$resultType === 'json')
-            return json_encode(self::$routes);
+        if($index !== null)
+            return self::$routes[$index];
 
         // return array of all routes-name
         return self::$routes;
     }
 
-    /**
-     * set render type
-     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since 20 Sep 2016
-     * @param $type
-     * @return SideNav
-     */
-    public static function type($type)
-    {
-        self::$resultType = $type;
-        return new self;
-    }
 
     /**
      * Render the menu items
@@ -189,23 +173,8 @@ class SideNav
      */
     public static function render($type = null)
     {
-        if(self::checkGroupId($type))
-        {
-
-            // render the menu json array
-            if(self::$resultType === 'json')
-                return json_encode(self::$menu[$type]);
-
-            // render the menu array
-            return self::$menu[$type];
-        }
-
-        // return single menu json array
-        if(self::$resultType === 'json')
-            return json_encode(self::$menu);
-
         // return single menu array
-        return self::$menu[0];
+        return self::$menu;
     }
 
     /**
@@ -216,7 +185,7 @@ class SideNav
      */
     public static function checkGroupId($type)
     {
-        if($type !== null && isset(self::$type))
+        if($type !== null && isset(self::$group))
             return true;
 
         return false;

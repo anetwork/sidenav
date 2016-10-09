@@ -44,7 +44,7 @@ class Menu
     protected $openChildOnClick = true;
 
     // the sub menu array
-    protected $submenu;
+    protected $submenu = [];
 
     /**
      * Attach sub menu array

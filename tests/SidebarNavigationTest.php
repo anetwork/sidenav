@@ -6,15 +6,10 @@
  * @since 24 Sep 2016
  */
 
-use Anetwork\SideNav\Menu;
 use Anetwork\SideNav\SideNav;
 
 class SidebarNavigationTest extends PHPUnit_Framework_TestCase
 {
-
-    // instance of sidenav class
-    protected $sidenav;
-
     // route name
     protected $route;
 
@@ -24,27 +19,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     // route menu options callback
     protected $callback;
 
-    // results of menu array
-    protected $results;
-
-
-    /**
-     * SidebarNavigationTest constructor.
-     */
     public function __construct()
-    {
-        // call parent construct
-        parent::__construct();
-
-        // make instance of SideNav Object
-        $this->sidenav = new SideNav;
-    }
-
-
-    /**
-     * Register a menu item
-     */
-    public function registerMenu()
     {
         // route name
         $this->route = "home_page";
@@ -68,8 +43,14 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
             });
 
         };
+    }
 
-        $this->sidenav->register($this->route, $this->callback);
+    /**
+     * Register a menu item
+     */
+    public function registerMenu()
+    {
+        SideNav::register($this->route, $this->callback);
     }
 
     /**
@@ -78,7 +59,7 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     public function registerMenuGroup()
     {
         // set group
-        $this->sidenav->group('user',function (){
+        SideNav::group('user',function (){
             $this->registerMenu();
         });
     }
@@ -88,11 +69,10 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testRegistered()
     {
-        // register a random menu item
         $this->registerMenu();
 
         // Check menu has been registered
-        $this->assertArrayHasKey($this->route,$this->sidenav->routes());
+        $this->assertArrayHasKey($this->route,SideNav::routes());
 
     }
 
@@ -101,13 +81,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testRegisteredSubMenu()
     {
-
-        // register a random menu item
-        $this->registerMenu();
-
         // Check menu has been registered
-        $this->assertEquals($this->subMenu,$this->sidenav->routes()[$this->route][0]);
-
+        $this->assertEquals($this->subMenu,SideNav::routes($this->route)[0]);
     }
 
     /**
@@ -115,23 +90,10 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testItemHasNotClassNameOption()
     {
-        // register a random menu item
-        $this->registerMenu();
+        $result = SideNav::render();
 
         // Check menu has not class name option
-        $this->assertEmpty($this->sidenav->render()[0]['class']);
-    }
-
-    /**
-     * check menu has json type
-     */
-    public function testJsonRender()
-    {
-        // register menu item
-        $this->registerMenu();
-
-        // Check menu has json type
-        $this->assertJson($this->sidenav->type('json')->render());
+        $this->assertEmpty($result[0]['class']);
     }
 
 
@@ -140,11 +102,10 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testRegisterGroup()
     {
-        // register menu item
         $this->registerMenuGroup();
 
         // check group item has been registered
-        $this->assertArrayHasKey('user',$this->sidenav->type('array')->render());
+        $this->assertArrayHasKey('user',SideNav::render());
     }
 
     /**
@@ -152,11 +113,8 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
      */
     public function testGroupHasRegisteredItem()
     {
-        // register menu item
-        $this->registerMenuGroup();
-
         // check render group menu has registered item
-        $this->assertEquals($this->route,$this->sidenav->type('array')->render('user')[0]['name']);
+        $this->assertEquals($this->route,SideNav::render('user')[0]['name']);
 
     }
 
