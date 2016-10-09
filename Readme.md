@@ -62,28 +62,23 @@ SideNav::register('{item_name}',function($menu){
 });
 ```
 
-## If statement
-
-* For register the items with checkstatus , you must have a checkStatus object
-* Create the checkstatus object , and Define it to SideNav
-
-```php
-SideNav::if(The_checkstatus_object_name::class);
-SideNav::if(The_checkstatus_object_name::class);
-```
-
-## Register If statement
-If you want register a item with if statement, you should use registerWithIf method of SideNav Object
-* the method , accepts 2 arguments
+## Register With Check Status
+If you want register a item with checkStatus, you should use registerWithCheck method of SideNav Object
+* the method , accepts 3 arguments
 * the first one must be a string of your item name and ** checkstatus name **
 * the second one must be function literal to use Menu Object for define all of menu options
+* the third one must be a function literal of your check state , return of function mustb be true or false
 
 ```php
-SideNav::registerWithIf('{item_name}',function($menu){
+SideNav::registerWithCheck('{item_name}',function($menu){
     $menu->link('the_item_url');
     $menu->title('the title');
     $menu->className('class-name');
     $menu->icon('fa fa-example');    
+},function(){
+
+    // checking area
+
 });
 ```
 
