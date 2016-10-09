@@ -109,10 +109,10 @@ class SideNav
      * @param  $callback
      * @param  $checkCallback
      */
-    public static function registerWithCheck($route , $callback , $checkCallback = null)
+    public static function registerWithCheck($route , $callback , $checkCallback)
     {
         // check status of route
-        if (self::checkStatus($route, $checkCallback)) {
+        if ($checkCallback === true) {
             self::register($route, $callback);
         }
     }
@@ -208,43 +208,6 @@ class SideNav
         }
 
         return false;
-    }
-
-    /**
-     * Check user status
-     *
-     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since  19 Sep 2016
-     * @param  $route
-     * @param  $callback
-     * @return bool
-     */
-    public static function checkStatus($route,$callback = false)
-    {
-        if ($callback instanceof \Closure) {
-            if ($callback()) {
-                return true;
-            }
-        }
-
-        // check status class name
-        $obj = self::$checkStatusObject['object'];
-
-        // check status method name
-        $method = self::$checkStatusObject['method'];
-
-        if(class_exists($obj)) {
-            // instance of class
-            $class = new $obj;
-
-            // call method of class
-            if ($class->$method($route)) {
-                return true;
-            }
-            return false;
-        } else {
-            throw new \Exception("The CheckStatus class not found !");
-        }
     }
 
 }
