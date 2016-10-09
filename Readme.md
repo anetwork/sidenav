@@ -152,18 +152,12 @@ SideNav::group('user',function(){
 ### Render
 #### Render menu if you using grouping
 ```php
-$menu = SideNav::render('name_of_your_group');
-    
-print_r($menu);
+SideNav::render();
 ```
-
-#### Render menu if you dont using grouping
+* you can render you sidenav group , just call your name of group in argument
 ```php
-$menu = SideNav::render();
-    
-print_r($menu);
+SideNav::render({name_of_your_group});
 ```
-
 
 
 ### Menu options
