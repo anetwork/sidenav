@@ -104,7 +104,7 @@ class SideNav
      * @param $callback
      * @param $checkCallback
      */
-    public static function registerWithCheckStatus($route , $callback , $checkCallback = null)
+    public static function registerWithCheck($route , $callback , $checkCallback = null)
     {
         // check status of route
         if (self::checkStatus($route,$checkCallback)){
