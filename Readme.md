@@ -38,7 +38,7 @@ composer require anetwork/sidenav
 * the second one must be a function literal to use Menu Object for define all of menu options
 
 ```php
-SideNav::register('{item_name}',function($menu){
+SideNav::register('item_name',function($menu){
 
     $menu->link('the_item_url');
     
@@ -49,7 +49,7 @@ SideNav::register('{item_name}',function($menu){
     $menu->icon('fa fa-example'); //  use on font-awesome icon
     
     // Register submenu to item
-    $menu->sub('{sub_item_name}',function ($menu){
+    $menu->sub('sub_item_name',function ($menu){
         $menu->link('the_item_url');
         $menu->title('the submenu title');
         $menu->icon('fa fa-example');
@@ -74,7 +74,7 @@ If you want register a submenu in item with checkStatus, you should use subWithC
 
 
 ```php
-SideNav::register('{item_name}',function($menu){
+SideNav::register('item_name',function($menu){
 
     /**
      * 
@@ -82,7 +82,7 @@ SideNav::register('{item_name}',function($menu){
      *
      */
      
-     $menu->subWithCheck('{sub_item_name}',function($menu){
+     $menu->subWithCheck('sub_item_name',function($menu){
      
         /**
          * 
@@ -116,7 +116,7 @@ If you want register a item with checkStatus, you should use registerWithCheck m
 * third one must be a function literal of your check state , return of function mustb be true or false
 
 ```php
-SideNav::registerWithCheck('{item_name}',function($menu){
+SideNav::registerWithCheck('item_name',function($menu){
 
     $menu->link('the_item_url');
     
@@ -131,6 +131,7 @@ SideNav::registerWithCheck('{item_name}',function($menu){
     // checking area
     // you can define the if statement here to return boolean | true or false
     // :: Example
+    
     if($_SESSION['user_id'] == 2){
         return true;
     }
@@ -150,12 +151,15 @@ SideNav::group('user',function(){
 ```
 
 ### Render
+
 ```php
 SideNav::render();
 ```
-* you can render you sidenav group , just call your name of group in argument
+
+* if you want to render your group , just call your group name in argument
+
 ```php
-SideNav::render({name_of_your_group});
+SideNav::render('name_of_your_group');
 ```
 
 
