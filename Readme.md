@@ -169,6 +169,7 @@ SideNav::render('name_of_your_group');
 | ------- | ------ | --------- | -------- |
 | `->icon()` | required | Define icon class | String |
 | `->link()` | required | Set link of item | String |
+| `->regex()` | optional | Set the regex of item link | array |
 | `->className()` | optional | The class of item | String |
 | `->newTab()` | optional | newTab link target | Boolean : defalt => false |
 | `->title()` | required | The title of item | String |
