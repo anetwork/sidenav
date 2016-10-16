@@ -236,7 +236,6 @@ class Menu
             'class' => $this->class,
             'icon' => $this->icon,
             'link' => $this->link,
-            'regex' => $this->regex,
             'selected' => $this->selected,
             'is_new' => $this->isNew,
             'open_child_on_click' => $this->openChildOnClick,
