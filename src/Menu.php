@@ -22,7 +22,8 @@ class Menu
     // the url option
     protected $link = [
         'new_tab' => false,
-        'value' => null
+        'value' => null,
+        'regex' => []
     ];
 
     // the class-name option
@@ -71,7 +72,7 @@ class Menu
      */
     public function subWithCheck($route, $callback , $checkCallback)
     {
-        if($checkCallback === true) {
+        if($checkCallback()) {
             $sub = SideNav::addSub($route, $callback);
             array_push($this->submenu, $sub);
         }
@@ -157,12 +158,22 @@ class Menu
      * @author Alireza Josheghani <a.josheghani@anetwork.ir>
      * @since  20 Sep 2016
      * @param  $link
-     * @return $this
      */
     public function link($link)
     {
         $this->link['value'] = $link;
-        return $this;
+    }
+
+    /**
+     * Set the regex link of menu
+     *
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since  16 Oxt 2016
+     * @param  array $regex
+     */
+    public function regex(array $regex)
+    {
+        $this->link['regex'] = $regex;
     }
 
     /**
@@ -225,6 +236,7 @@ class Menu
             'class' => $this->class,
             'icon' => $this->icon,
             'link' => $this->link,
+            'regex' => $this->regex,
             'selected' => $this->selected,
             'is_new' => $this->isNew,
             'open_child_on_click' => $this->openChildOnClick,
