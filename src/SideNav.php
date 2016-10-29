@@ -13,28 +13,58 @@ namespace Anetwork\SideNav;
 class SideNav
 {
 
-    // use Sidenav helper methods in class
+    /**
+     * use Sidenav helper methods in class
+     */
     use SideNavHelpers;
 
-    // group route
+    /**
+     * group route
+     *
+     * @var string
+     */
     protected static $group;
 
-    // current position of route
+    /**
+     * current position of route
+     *
+     * @var string
+     */
     protected static $currentRoute;
 
-    // the item url
+    /**
+     * the item url
+     *
+     * @var string
+     */
     protected static $url;
 
-    // all routes-name registered
+    /**
+     * all routes-name registered
+     *
+     * @var array
+     */
     protected static $routes = [];
 
-    // instance of check status object
+    /**
+     * instance of check status object
+     *
+     * @var array
+     */
     protected static $checkStatusObject = [];
 
-    // status of navigation
+    /**
+     * status of navigation
+     *
+     * @var boolean
+     */
     protected static $status = false;
 
-    // render array
+    /**
+     * render array
+     *
+     * @var array
+     */
     protected static $menu = [];
 
     /**
