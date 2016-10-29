@@ -13,38 +13,81 @@ namespace Anetwork\SideNav;
 class Menu
 {
 
-    // the route name
+    /**
+     * the route name
+     *
+     * @var string
+     */
     protected $route;
 
-    // the title option
+    /**
+     * the title option
+     *
+     * @var string
+     */
     protected $title;
 
-    // the url option
+    /**
+     * the url option
+     *
+     * @var array
+     */
     protected $link = [
         'new_tab' => false,
         'value' => null,
         'regex' => []
     ];
 
-    // the class-name option
+    /**
+     * the class-name option
+     *
+     * @var string
+     */
     protected $class;
 
-    // the icon option
+    /**
+     * the icon option
+     *
+     * @var array
+     */
     protected $icon = [
         'tag' => 'i',
         'value' => null
     ];
 
-    // is_new icon option : boolean
+    /**
+     * is_new icon option
+     *
+     * @var boolean
+     */
     protected $isNew = false;
 
-    // selected option
+    /**
+     * selected option
+     *
+     * @var boolean
+     */
     protected $selected = false;
 
-    // open child when item is active : boolean
+    /**
+     * open child when item is active
+     *
+     * @var boolean
+     */
     protected $openChildOnClick = true;
 
-    // the sub menu array
+    /**
+     * Set parent class attribute when child open
+     *
+     * @var boolean
+     */
+    protected $parentClassWhenChildOpen;
+
+    /**
+     * the sub menu
+     *
+     * @var array
+     */
     protected $submenu = [];
 
     /**
@@ -114,6 +157,18 @@ class Menu
     public function title($title)
     {
         $this->title = $title;
+    }
+
+    /**
+     * Set parent class name when child open
+     *
+     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
+     * @since  29 Oct 2016
+     * @param $class
+     */
+    public function parentClassWhenChildOpen($class)
+    {
+        $this->parentClassWhenChildOpen = $class;
     }
 
     /**
@@ -234,6 +289,7 @@ class Menu
             'name' => $this->route,
             'title' => $this->title,
             'class' => $this->class,
+            'parent_class_when_open_child' => $this->parentClassWhenChildOpen,
             'icon' => $this->icon,
             'link' => $this->link,
             'selected' => $this->selected,
