@@ -7,27 +7,44 @@
  * @since  24 Sep 2016
  */
 
+use Anetwork\SideNav\Menu;
 use Anetwork\SideNav\SideNav;
 
 class SidebarNavigationTest extends PHPUnit_Framework_TestCase
 {
-    // route name
+    /**
+     * route name
+     *
+     * @var string
+     */
     protected $route;
 
-    // submenu name
+    /**
+     * submenu name
+     *
+     * @var string
+     */
     protected $subMenu;
 
-    // route menu options callback
+    /**
+     * route menu options callback
+     *
+     * @var object
+     */
     protected $callback;
 
+    /**
+     * SidebarNavigationTest constructor.
+     */
     public function __construct()
     {
-        // route name
+        parent::__construct();
+
         $this->route = "home_page";
 
         $this->subMenu = "user_profile";
 
-        $this->callback = function ($menu) {
+        $this->callback = function (Menu $menu) {
 
             $menu->link('/home');
 
@@ -37,12 +54,10 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
 
             $menu->title('Dashboard');
 
-            $menu->sub(
-                $this->subMenu, function ($menu) {
-                    $menu->link('/user/profile');
-                    $menu->icon('fa fa-user');
-                }
-            );
+            $menu->sub($this->subMenu, function (Menu $menu) {
+                $menu->link('/user/profile');
+                $menu->icon('fa fa-user');
+            });
 
         };
     }
@@ -61,11 +76,9 @@ class SidebarNavigationTest extends PHPUnit_Framework_TestCase
     public function registerMenuGroup()
     {
         // set group
-        SideNav::group(
-            'user', function () {
-                $this->registerMenu();
-            }
-        );
+        SideNav::group('user', function () {
+            $this->registerMenu();
+        });
     }
 
     /**
