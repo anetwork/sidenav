@@ -1,38 +1,38 @@
 <?php
 
 /**
+ * SideNav Menu class
+ *
  * @author Alireza Josheghani <a.josheghani@anetwork.ir>
  * @version 1.0
  * @package SideNav
  * @since 20 Sep 2016
- * SideNav Menu class
  */
 
 namespace Anetwork\SideNav;
 
 class Menu
 {
-
     /**
      * the route name
      *
      * @var string
      */
-    protected $route;
+    private $route;
 
     /**
      * the title option
      *
      * @var string
      */
-    protected $title;
+    private $title;
 
     /**
      * the url option
      *
      * @var array
      */
-    protected $link = [
+    private $link = [
         'new_tab' => false,
         'value' => null,
         'regex' => []
@@ -43,17 +43,14 @@ class Menu
      *
      * @var string
      */
-    protected $class;
+    private $className;
 
     /**
      * the icon option
      *
      * @var array
      */
-    protected $icon = [
-        'tag' => 'i',
-        'value' => null
-    ];
+    private $icon = [ 'tag' => 'i', 'value' => null ];
 
     /**
      * is_new icon option
@@ -116,8 +113,7 @@ class Menu
     public function subWithCheck($route, $callback , $checkCallback)
     {
         if($checkCallback()) {
-            $sub = SideNav::addSub($route, $callback);
-            array_push($this->submenu, $sub);
+            $this->sub($route,$callback);
         }
     }
 
@@ -131,6 +127,7 @@ class Menu
     public function icon($icon)
     {
         $this->icon['value'] = $icon;
+
         return $this;
     }
 
@@ -144,6 +141,7 @@ class Menu
     public function tag($tag)
     {
         $this->icon['tag'] = $tag;
+
         return $this;
     }
 
@@ -180,7 +178,7 @@ class Menu
      */
     public function className($className)
     {
-        $this->class = $className;
+        $this->className = $className;
     }
 
     /**
@@ -279,22 +277,22 @@ class Menu
         // set route name of menu
         $this->routeName($route);
 
-        $submenu = null;
+        $submenu = [];
 
-        if(!empty($this->submenu)) {
+        if(! empty($this->submenu)) {
             $submenu = $this->submenu;
         }
 
         $result = [
             'name' => $this->route,
             'title' => $this->title,
-            'class' => $this->class,
-            'parent_class_when_open_child' => $this->parentClassWhenChildOpen,
-            'icon' => $this->icon,
             'link' => $this->link,
-            'selected' => $this->selected,
+            'icon' => $this->icon,
             'is_new' => $this->isNew,
+            'class' => $this->className,
+            'selected' => $this->selected,
             'open_child_on_click' => $this->openChildOnClick,
+            'parent_class_when_open_child' => $this->parentClassWhenChildOpen,
             'sub' => $submenu
         ];
 
@@ -303,7 +301,6 @@ class Menu
         }
 
         return $result;
-
     }
 
 }
