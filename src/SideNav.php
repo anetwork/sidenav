@@ -1,21 +1,18 @@
 <?php
 
 /**
+ * SideNav main class
+ *
  * @author Alireza Josheghani <a.josheghani@anetwork.ir>
  * @version 1.0
  * @package SideNav
  * @since 19 Sep 2016
- * SideNav main class
  */
 
 namespace Anetwork\SideNav;
 
 class SideNav
 {
-
-    /**
-     * use Sidenav helper methods in class
-     */
     use SideNavHelpers;
 
     /**
@@ -23,64 +20,28 @@ class SideNav
      *
      * @var string
      */
-    protected static $group;
+    private static $group;
 
     /**
      * current position of route
      *
      * @var string
      */
-    protected static $currentRoute;
+    private static $currentItem;
 
     /**
-     * the item url
-     *
-     * @var string
-     */
-    protected static $url;
-
-    /**
-     * all routes-name registered
+     * All routes registered
      *
      * @var array
      */
-    protected static $routes = [];
-
-    /**
-     * instance of check status object
-     *
-     * @var array
-     */
-    protected static $checkStatusObject = [];
-
-    /**
-     * status of navigation
-     *
-     * @var boolean
-     */
-    protected static $status = false;
+    private static $routes = [];
 
     /**
      * render array
      *
      * @var array
      */
-    protected static $menu = [];
-
-    /**
-     * Define checkstatus object
-     *
-     * @author Alireza Josheghani <a.josheghani@anetwork.ir>
-     * @since  19 Sep 2016
-     * @param  $class
-     */
-    public static function checkStatusObject($class,$method)
-    {
-        self::$checkStatusObject = [
-            'object' => $class,
-            'method' => $method
-        ];
-    }
+    private static $menu = [];
 
     /**
      * Make the SideNav group
@@ -113,21 +74,21 @@ class SideNav
     public static function register($route, $callback)
     {
         // set current route
-        self::$currentRoute = $route;
+        self::$currentItem = $route;
 
         // register route
-        self::$routes[self::$currentRoute] = [];
+        self::$routes[self::$currentItem] = [];
 
         // make menu array
         $array = self::add($route, $callback);
 
-        if (self::checkGroupId(self::$group)) {
+        if (self::checkGroupName(self::$group)) {
             // add to the group render array
-            array_push(self::$menu[self::$group], $array);
+            return array_push(self::$menu[self::$group], $array);
         }
 
         // add to the single render array
-        array_push(self::$menu, $array);
+        return array_push(self::$menu, $array);
     }
 
     /**
@@ -139,10 +100,10 @@ class SideNav
      * @param  $callback
      * @param  $checkCallback
      */
-    public static function registerWithCheck($route , $callback , $checkCallback)
+    public static function registerWithCheck($route , $callback , $check)
     {
         // check status of route
-        if ($checkCallback === true) {
+        if ($check()) {
             self::register($route, $callback);
         }
     }
@@ -159,7 +120,7 @@ class SideNav
     public static function addSub($route, $callback)
     {
         // register route name
-        array_push(self::$routes[self::$currentRoute], $route);
+        array_push(self::$routes[self::$currentItem], $route);
 
         // return submenu array
         return self::add($route, $callback);
@@ -231,7 +192,7 @@ class SideNav
      * @since  19 Sep 2016
      * @return bool
      */
-    public static function checkGroupId($type)
+    private static function checkGroupName($type)
     {
         if($type !== null && isset(self::$group)) {
             return true;

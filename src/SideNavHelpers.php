@@ -1,11 +1,12 @@
 <?php
 
 /**
+ * SideNav helper methods
+ *
  * @author Alireza Josheghani <a.josheghani@anetwork.ir>
  * @version 1.0
  * @package SideNav
  * @since 8 Oct 2016
- * SideNav helper methods
  */
 
 namespace Anetwork\SideNav;
